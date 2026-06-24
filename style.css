@@ -1,0 +1,42 @@
+:root{
+  --bg:#f4f6fb;
+  --card:#ffffff;
+  --accent:#1f6feb;
+  --muted:#6b7280;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;}
+body{background:var(--bg);color:#111}
+header{display:flex;flex-direction:column;gap:8px;padding:12px 16px;background:linear-gradient(90deg,var(--accent),#4aa3ff);color:#fff}
+header h1{margin:0;font-size:1.25rem}
+.top-controls{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.top-controls input[type="file"]{display:inline-block}
+main{display:grid;grid-template-columns:1fr 1.2fr 320px;gap:16px;padding:16px;max-width:1200px;margin:0 auto}
+.card{background:var(--card);padding:12px;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,0.06)}
+.month-nav{display:flex;justify-content:space-between;align-items:center;padding:6px}
+#calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;padding:6px}
+.day-header{font-weight:600;text-align:center;color:var(--muted)}
+.cell{min-height:80px;padding:6px;border-radius:6px;background:#fff;border:1px solid #eee;cursor:pointer;position:relative}
+.cell .dateNum{position:absolute;top:6px;right:6px;font-size:0.85rem;color:var(--muted)}
+.cell .badge{display:inline-block;margin-top:18px;padding:4px 6px;font-size:0.75rem;border-radius:4px;background:var(--accent);color:#fff}
+.cell.today{outline:2px solid #ffd33d}
+.cell.other-month{opacity:0.35}
+#caseLists .category{margin-bottom:10px}
+.category h3{margin:6px 0 4px}
+.case-row{display:flex;justify-content:space-between;align-items:center;padding:8px;border-radius:6px;border:1px solid #f0f0f0;margin-bottom:6px}
+.case-row .meta{font-size:0.9rem;color:var(--muted)}
+#addCaseSection form label{display:block;margin-bottom:8px}
+#caseDetails{max-height:260px;overflow:auto}
+.modal{Position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.4)}
+.modal.hidden{display:none}
+.modal-content{background:#fff;padding:12px;border-radius:8px;width:320px}
+.modal-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:8px}
+footer{padding:12px;text-align:center;color:var(--muted);font-size:0.9rem}
+
+/* Responsive */
+@media (max-width:1000px){
+  main{grid-template-columns:1fr; padding:12px}
+  #addCaseSection{order:3}
+  #listSection{order:2}
+  #calendarSection{order:1}
+}

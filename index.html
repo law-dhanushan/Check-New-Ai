@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Court Role Book — Daily Court List</title>
+
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#1f6feb" />
+
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Court Role Book</h1>
+    <div class="top-controls">
+      <div>
+        <label for="importFile">Import Excel/CSV</label>
+        <input id="importFile" type="file" accept=".xlsx,.xls,.csv" />
+        <button id="importBtn">Import</button>
+        <input id="gsUrl" placeholder="Paste Google Sheets CSV export URL (optional)" />
+        <button id="importGsBtn">Sync Now (Google Sheet)</button>
+        <label style="margin-left:8px"><input type="checkbox" id="autoSync" /> Auto-sync</label>
+        <input id="autoInterval" type="number" min="1" value="15" style="width:70px" title="Minutes" />
+      </div>
+      <div>
+        <input id="searchCase" placeholder="Search Case Number" />
+        <button id="searchBtn">Search</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="calendarSection" class="card">
+      <div class="month-nav">
+        <button id="prevMonth">&lt;</button>
+        <div id="monthLabel"></div>
+        <button id="nextMonth">&gt;</button>
+      </div>
+      <div id="calendar"></div>
+    </section>
+
+    <section id="listSection" class="card">
+      <h2 id="selectedDateLabel">Select a date</h2>
+      <div id="exports" style="display:none;">
+        <button id="exportExcel">Export Excel</button>
+        <button id="exportPdf">Export PDF</button>
+        <button id="exportDoc">Export Word</button>
+      </div>
+      <div id="caseLists"></div>
+    </section>
+
+    <section id="addCaseSection" class="card">
+      <h3>Add / Update Case</h3>
+      <form id="addCaseForm">
+        <label>Case Number (required)<input id="caseNumber" required /></label>
+        <label>Next Date (dd/mm/yyyy) (required)<input id="nextDate" placeholder="DD/MM/YYYY" required /></label>
+        <label>Next Step
+          <select id="nextStep">
+            <option>Trial</option>
+            <option>Defense Trial</option>
+            <option>Submission</option>
+            <option>Argument/Inquiry</option>
+            <option>Calling</option>
+          </select>
+        </label>
+        <div>
+          <button type="submit">Save</button>
+        </div>
+      </form>
+      <hr />
+      <h3>Case History / Details</h3>
+      <div id="caseDetails"></div>
+    </section>
+  </main>
+
+  <!-- Modal for inline update from date list -->
+  <div id="modal" class="modal hidden">
+    <div class="modal-content">
+      <h4>Update Case</h4>
+      <form id="modalForm">
+        <div><strong id="modalCase"></strong></div>
+        <label>New Next Date <input id="modalDate" placeholder="DD/MM/YYYY" required /></label>
+        <label>New Next Step
+          <select id="modalStep">
+            <option>Trial</option>
+            <option>Defense Trial</option>
+            <option>Submission</option>
+            <option>Argument/Inquiry</option>
+            <option>Calling</option>
+          </select>
+        </label>
+        <div class="modal-actions">
+          <button type="submit">Save</button>
+          <button type="button" id="modalClose">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    <small>Save this page to your phone (Add to Home screen / Install) to use as an app.</small>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
